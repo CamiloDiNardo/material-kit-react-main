@@ -6,63 +6,110 @@ import { collection, getDocs, getDoc, deleteDoc, updateDoc, doc } from 'firebase
 import { db } from '../firebaseConfig/firebase';
 
 const DashboardApp = () => {
-  const [products, setProducts] = useState({ bebidas: [] });
+  // hacemos un usestate y le declaramos los array vacios dentro
+  const [products, setProducts] = useState({ pizzas: [], bebidas: [], ingredientes: [], papas: [] });
   useEffect(() => {
-    const obtenerDatos = async () => {
+    const getData = async () => {
       try {
         const data = await getDocs(collection(db, 'products'));
         const arrayData = data.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
         console.log(arrayData);
-        setProducts({ bebidas: arrayData[1].bebidas });
+        setProducts({
+          pizzas: arrayData[1].pizzas,
+          bebidas: arrayData[1].bebidas,
+          ingredientes: arrayData[1].ingredientes,
+          papas: arrayData[1].papas,
+        });
       } catch (error) {
         console.log(error);
       }
     };
-    obtenerDatos();
+    getData();
     console.log(products);
   }, []);
+  // DataGrid
   const [rowsPerPage, setRowsPerPage] = useState(25);
-  // METHODS
+
   const handleChangeRowsPerPage = (e) => {
     setRowsPerPage(e);
   };
+  // Valores de las columnas DataGrid
   const columns = [
     {
       field: 'actions',
       headerName: 'Actions',
       renderCell: (params) => (
         <Button color="primary" component="label">
-          CUALQUIER ICONO
+          ICONO
         </Button>
       ),
     },
     {
-      field: 'precio',
-      headerName: 'Precio',
+      field: 'pizzas', // este field es lo que esta en el map.
+      headerName: 'Pizzas', // titulo de la tabla
       minWidth: 100,
     },
     {
-      field: 'nombre',
-      headerName: 'Nombre',
-      minWidth: 200,
+      field: 'preciopizzas',
+      headerName: '$',
+      minWidth: 100,
+    },
+    {
+      field: 'bebidas',
+      headerName: 'Bebidas',
+      minWidth: 100,
+    },
+    {
+      field: 'preciobebidas',
+      headerName: '$',
+      minWidth: 100,
+    },
+    {
+      field: 'ingredientes',
+      headerName: 'Ingredientes',
+      minWidth: 100,
+    },
+    {
+      field: 'precioingredientes',
+      headerName: '$',
+      minWidth: 100,
+    },
+    {
+      field: 'papas',
+      headerName: 'Papas',
+      minWidth: 100,
+    },
+    {
+      field: 'preciopapas',
+      headerName: '$',
+      minWidth: 100,
     },
   ];
-  const rows =
-    products.bebidas.lenght > 0
-      ? products.bebidas.map((process, i) => ({
-          actions: i,
-          id: i,
-          precio: process.precio,
-          nombre: process.nombre,
-        }))
-      : [];
+  const rows = products.bebidas?.map((process, i) => ({
+    actions: i,
+    id: i,
+    bebidas: process.nombre,
+    preciobebidas: process.precio,
+    /* preciopizzas: process.precio,
+    precioingredientes: process.precio,
+    preciopapas: process.precio,
+    pizzas: process.nombre,
+    ingredientes: process.nombre,
+    papas: process.nombre, */
+  }));
+  products.pizzas?.map((process, i) => ({
+    actions: i,
+    id: i,
+    pizzas: process.nombre,
+    preciopizzas: process.precio,
+  }));
   return (
     <DataGrid
       showColumnRightBorder
       disableSelectionOnClick
       rowsPerPageOptions={[5, 10, 25, 50, 100]}
       onPageSizeChange={handleChangeRowsPerPage}
-      rows={rows || []}
+      rows={rows}
       columns={columns}
       pageSize={rowsPerPage}
       sx={{
