@@ -1,16 +1,13 @@
 import PropTypes from 'prop-types';
-// material
+import { Link } from 'react-router-dom';
 import { alpha, styled } from '@mui/material/styles';
 import { Box, Stack, AppBar, Toolbar, IconButton } from '@mui/material';
-// components
 import Iconify from '../../components/Iconify';
-//
 import Searchbar from './Searchbar';
 import AccountPopover from './AccountPopover';
 import LanguagePopover from './LanguagePopover';
 import NotificationsPopover from './NotificationsPopover';
-
-// ----------------------------------------------------------------------
+import { useCartContext } from '../../context/CartContext';
 
 const DRAWER_WIDTH = 280;
 const APPBAR_MOBILE = 64;
@@ -34,24 +31,30 @@ const ToolbarStyle = styled(Toolbar)(({ theme }) => ({
   },
 }));
 
-// ----------------------------------------------------------------------
+//
 
 DashboardNavbar.propTypes = {
   onOpenSidebar: PropTypes.func,
 };
-
 export default function DashboardNavbar({ onOpenSidebar }) {
+  // Probamos a ver si funciona, pero esto tendria que estar afuera.
+  const { cartList, totalQuantity } = useCartContext();
+
   return (
     <RootStyle>
       <ToolbarStyle>
         <IconButton onClick={onOpenSidebar} sx={{ mr: 1, color: 'text.primary', display: { lg: 'none' } }}>
           <Iconify icon="eva:menu-2-fill" />
         </IconButton>
-
         <Searchbar />
         <Box sx={{ flexGrow: 1 }} />
 
         <Stack direction="row" alignItems="center" spacing={{ xs: 0.5, sm: 1.5 }}>
+          <IconButton>
+            <Link to="/dashboard/cart">
+              <Iconify icon="el:shopping-cart">{cartList.length < 1 ? '' : totalQuantity()}</Iconify>
+            </Link>
+          </IconButton>
           <LanguagePopover />
           <NotificationsPopover />
           <AccountPopover />

@@ -10,6 +10,9 @@ import NotFound from './pages/Page404';
 import Register from './pages/Register';
 import Products from './pages/Products';
 import DashboardApp from './pages/DashboardApp';
+import Cart from './pages/Cart';
+import ItemDetailContainer from './pages/ItemDetailContainer';
+import ItemListContainer from './pages/ItemListContainer';
 
 export default function Router() {
   return useRoutes([
@@ -21,6 +24,20 @@ export default function Router() {
         { path: 'user', element: <User /> },
         { path: 'products', element: <Products /> },
         { path: 'blog', element: <Blog /> },
+        {
+          // Carrito por dentro
+          path: 'cart',
+          element: <Cart />,
+        },
+        {
+          path: 'items',
+          element: <ItemListContainer />,
+        },
+        {
+          // Items Del Carrito
+          path: ':id',
+          element: <ItemDetailContainer />,
+        },
       ],
     },
     {

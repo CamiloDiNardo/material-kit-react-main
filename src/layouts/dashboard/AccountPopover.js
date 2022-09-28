@@ -8,7 +8,7 @@ import MenuPopover from '../../components/MenuPopover';
 // mocks_
 import account from '../../_mock/account';
 
-// ----------------------------------------------------------------------
+// Opciones del menu desplegable del perfil
 
 const MENU_OPTIONS = [
   {
@@ -26,9 +26,14 @@ const MENU_OPTIONS = [
     icon: 'eva:settings-2-fill',
     linkTo: '#',
   },
+  {
+    label: 'Carrito',
+    icon: 'el:shopping-cart',
+    linkTo: '/dashboard/cart ',
+  },
 ];
 
-// ----------------------------------------------------------------------
+//
 
 export default function AccountPopover() {
   const anchorRef = useRef(null);

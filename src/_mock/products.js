@@ -1,26 +1,3 @@
-/* import React, { useState, useEffect } from 'react'
-import { Link } from 'react-router-dom'
-import {collection, getDocs, getDoc, deleteDoc} from 'firebase/firestore'
-import { db } from '../firebaseConfig/firebase'
-const [productos,setProductos] = usestate([]) 
-
-const productosdedb = collection{db,"productos"}
-const conseguirProductos = async () =>{
-const data = await getDocs(productosdedb)
-console.log(data.doc)
-setProducts(
-data.docs.map( (doc) => ( {... doc.data(), id:doc.id})) (data.docs.map es la ruta de los
-  documentos, y lo q mapeamos es un documento) ...doc.data() es para decir que queremos
-la data del doc(osea todos los campos dentro del doc.) y tmb el id (que esta en otro lugar
-x eso ponemos id:doc.id). tmb podriamos elegir solo el id:
-data.docs.map( (doc) => ( { id:doc.id}))
-esto nos va a devolver TODOS los campos de nuestro doc con su id. ya despues con esto podes
-usarlos en algun lugar to=/edit/:id
-)
-console.log(products)
-}
-*/
-
 import { faker } from '@faker-js/faker';
 import { sample } from 'lodash';
 

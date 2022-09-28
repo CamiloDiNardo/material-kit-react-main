@@ -1,8 +1,7 @@
 // component
 import Iconify from '../../components/Iconify';
 
-// ----------------------------------------------------------------------
-
+// es el navegador de costado a la izquierda
 const getIcon = (name) => <Iconify icon={name} width={22} height={22} />;
 
 const navConfig = [
@@ -10,6 +9,12 @@ const navConfig = [
     title: 'dashboard',
     path: '/dashboard/app',
     icon: getIcon('eva:pie-chart-2-fill'),
+  },
+  {
+    // Items de la base de datos, lo ponemos con el dashboard para que se ponga adentro de el layout de dashboard.
+    title: 'items',
+    path: '/dashboard/items',
+    icon: getIcon('material-symbols:mode-heat'),
   },
   {
     title: 'user',
