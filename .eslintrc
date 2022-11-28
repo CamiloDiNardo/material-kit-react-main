@@ -2,19 +2,11 @@
   "root": true,
   "env": {
     "browser": true,
-    "node": true
+    "node": true,
+    "jest": true
   },
-  "extends": [
-    "airbnb",
-    "plugin:jsx-a11y/recommended",
-    "plugin:react-hooks/recommended",
-    "prettier"
-  ],
-  "plugins": [
-    "react",
-    "react-hooks",
-    "prettier"
-  ],
+  "extends": ["airbnb", "plugin:jsx-a11y/recommended", "plugin:react-hooks/recommended", "prettier"],
+  "plugins": ["react", "react-hooks", "prettier"],
   "parser": "@babel/eslint-parser",
   "parserOptions": {
     "ecmaVersion": 8,

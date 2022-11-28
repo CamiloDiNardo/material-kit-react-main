@@ -13,6 +13,7 @@ import DashboardApp from './pages/DashboardApp';
 import Cart from './pages/Cart';
 import ItemDetailContainer from './pages/ItemDetailContainer';
 import ItemListContainer from './pages/ItemListContainer';
+import Profile from './pages/Profile';
 
 export default function Router() {
   return useRoutes([
@@ -39,6 +40,10 @@ export default function Router() {
           element: <ItemDetailContainer />,
         },
       ],
+    },
+    {
+      path: 'Profile',
+      element: <Profile />,
     },
     {
       path: 'login',

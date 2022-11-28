@@ -11,8 +11,6 @@ import Logo from '../components/Logo';
 import { RegisterForm } from '../sections/auth/register';
 import AuthSocial from '../sections/auth/AuthSocial';
 
-// ----------------------------------------------------------------------
-
 const RootStyle = styled('div')(({ theme }) => ({
   [theme.breakpoints.up('md')]: {
     display: 'flex',
@@ -96,13 +94,12 @@ export default function Register() {
             <AuthSocial />
 
             <RegisterForm />
-
             <Typography variant="body2" align="center" sx={{ color: 'text.secondary', mt: 3 }}>
-              By registering, I agree to Minimal&nbsp;
+              By registering, I agree to Minimal &nbsp;
               <Link underline="always" color="text.primary" href="#">
                 Terms of Service
-              </Link>
-              {''}and{''}
+              </Link>{' '}
+              and{' '}
               <Link underline="always" color="text.primary" href="#">
                 Privacy Policy
               </Link>

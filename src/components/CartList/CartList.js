@@ -18,7 +18,7 @@ const CartList = ({ product, removeItem }) => {
         <TableCell align="center"> ${price} </TableCell>
         <TableCell align="center"> ${price * quantity} </TableCell>
         <TableCell align="center">
-          <Button onClick={() => removeItem(id)} variant="contained">
+          <Button onClick={() => removeItem(id)} data-testid="remover" variant="contained">
             Remover del carrito
           </Button>
         </TableCell>

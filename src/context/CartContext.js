@@ -7,10 +7,8 @@ export const useCartContext = () => useContext(CartContext);
 
 const CartContextProvider = ({ children }) => {
   const [cartList, setCartList] = useState([]);
-
   const addItem = (item) => {
     const index = cartList.findIndex((index) => index.id === item.id);
-
     if (index > -1) {
       const oldItem = cartList[index].quantity;
 
@@ -31,9 +29,7 @@ const CartContextProvider = ({ children }) => {
   };
 
   const totalPrice = () => cartList.reduce((acc, prod) => acc + prod.price * prod.quantity, 0);
-
   const totalQuantity = () => cartList.reduce((acc, prod) => acc + prod.quantity, 0);
-
   return (
     <CartContext.Provider
       value={{

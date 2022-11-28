@@ -1,5 +1,5 @@
 import { useRef, useState } from 'react';
-import { Link as RouterLink } from 'react-router-dom';
+import { Link as RouterLink, useNavigate } from 'react-router-dom';
 // @mui
 import { alpha } from '@mui/material/styles';
 import { Box, Divider, Typography, Stack, MenuItem, Avatar, IconButton } from '@mui/material';
@@ -7,7 +7,7 @@ import { Box, Divider, Typography, Stack, MenuItem, Avatar, IconButton } from '@
 import MenuPopover from '../../components/MenuPopover';
 // mocks_
 import account from '../../_mock/account';
-
+import { useAuthContext } from '../../context/AuthContext';
 // Opciones del menu desplegable del perfil
 
 const MENU_OPTIONS = [
@@ -19,7 +19,7 @@ const MENU_OPTIONS = [
   {
     label: 'Profile',
     icon: 'eva:person-fill',
-    linkTo: '#',
+    linkTo: '/profile',
   },
   {
     label: 'Settings',
@@ -47,7 +47,13 @@ export default function AccountPopover() {
   const handleClose = () => {
     setOpen(null);
   };
-
+  const navigate = useNavigate();
+  const { cerrarSesion } = useAuthContext();
+  const handlecerrarSesion = async () => {
+    await cerrarSesion;
+    handleClose();
+    navigate('/login', { replace: true });
+  };
   return (
     <>
       <IconButton
@@ -106,7 +112,7 @@ export default function AccountPopover() {
 
         <Divider sx={{ borderStyle: 'dashed' }} />
 
-        <MenuItem onClick={handleClose} sx={{ m: 1 }}>
+        <MenuItem onClick={handlecerrarSesion} sx={{ m: 1 }}>
           Logout
         </MenuItem>
       </MenuPopover>

@@ -23,11 +23,14 @@ const ItemCount = ({ stock, initial, onAdd }) => {
             color: 'red',
           }}
           onClick={handleSubtract}
+          data-testid="restar"
         >
           -
         </Button>
-        <Typography>{counter}</Typography>
-        <Button onClick={handleAdd}>+</Button>
+        <Typography data-testid="Valor">{counter}</Typography>
+        <Button onClick={handleAdd} data-testid="sumar">
+          +
+        </Button>
       </Box>
 
       <Typography

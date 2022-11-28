@@ -1,68 +1,70 @@
-import PropTypes from 'prop-types';
+/* eslint-disable react/prop-types */
+import React from 'react';
 // form
-import { useFormContext, Controller } from 'react-hook-form';
+import { Controller } from 'react-hook-form';
 // @mui
-import { Checkbox, FormControlLabel, FormGroup } from '@mui/material';
+import { Checkbox, Stack, TextField, Link, Typography } from '@mui/material';
 
-// ----------------------------------------------------------------------
-
-RHFCheckbox.propTypes = {
-  name: PropTypes.string.isRequired,
-};
-
-export function RHFCheckbox({ name, ...other }) {
-  const { control } = useFormContext();
-
-  return (
-    <FormControlLabel
-      control={
+const RHFCheckbox = ({ control }) => (
+  <div>
+    <Stack spacing={3}>
+      <Controller
+        name="email"
+        control={control}
+        rules={{ required: true }}
+        render={({ field: { onChange, value }, fieldState: { error } }) => (
+          <>
+            <TextField
+              placeholder="Your email goes here!"
+              type="text"
+              name="email"
+              value={value}
+              label="email"
+              variant="outlined"
+              onChange={onChange}
+              error={error}
+              helperText={error ? 'Email is required' : ''}
+            />
+          </>
+        )}
+      />
+      <Controller
+        name="password"
+        control={control}
+        rules={{ required: true }}
+        render={({ field: { onChange, value }, fieldState: { error } }) => (
+          <>
+            <TextField
+              placeholder="Your password goes here!"
+              multiline
+              variant="outlined"
+              label="password"
+              value={value}
+              onChange={onChange}
+              error={error}
+              helperText={error ? 'Please enter password' : ''}
+            />
+          </>
+        )}
+      />
+      <Stack direction="row" alignItems="center" justifyContent="start" sx={{ my: 2 }}>
         <Controller
-          name={name}
+          name="checkbox"
           control={control}
-          render={({ field }) => <Checkbox {...field} checked={field.value} />}
+          render={({ field: { onChange, value } }) => (
+            <>
+              <Checkbox value={value} onChange={onChange} />
+              <Typography>Remember me</Typography>
+              <Stack marginLeft={'12rem'}>
+                <Link variant="subtitle2" underline="hover">
+                  Forgot password?
+                </Link>
+              </Stack>
+            </>
+          )}
         />
-      }
-      {...other}
-    />
-  );
-}
-
-// ----------------------------------------------------------------------
-
-RHFMultiCheckbox.propTypes = {
-  name: PropTypes.string.isRequired,
-  options: PropTypes.array.isRequired,
-};
-
-export function RHFMultiCheckbox({ name, options, ...other }) {
-  const { control } = useFormContext();
-
-  return (
-    <Controller
-      name={name}
-      control={control}
-      render={({ field }) => {
-        const onSelected = (option) =>
-          field.value.includes(option) ? field.value.filter((value) => value !== option) : [...field.value, option];
-
-        return (
-          <FormGroup>
-            {options.map((option) => (
-              <FormControlLabel
-                key={option.value}
-                control={
-                  <Checkbox
-                    checked={field.value.includes(option.value)}
-                    onChange={() => field.onChange(onSelected(option.value))}
-                  />
-                }
-                label={option.label}
-                {...other}
-              />
-            ))}
-          </FormGroup>
-        );
-      }}
-    />
-  );
-}
+      </Stack>
+    </Stack>
+  </div>
+);
+export default RHFCheckbox;
