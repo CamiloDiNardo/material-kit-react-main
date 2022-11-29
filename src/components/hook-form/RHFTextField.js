@@ -51,7 +51,7 @@ const RHFTextField = ({ control }) => (
       <Controller
         name="email"
         control={control}
-        rules={{ required: true }}
+        rules={{ required: true, pattern: true }}
         render={({ field: { onChange, value }, fieldState: { error } }) => (
           <>
             <TextField
@@ -63,6 +63,7 @@ const RHFTextField = ({ control }) => (
               variant="outlined"
               onChange={onChange}
               error={error}
+              pattern="/^[A-Za-z]+$/i"
               helperText={error ? 'email is required' : ''}
             />
           </>
