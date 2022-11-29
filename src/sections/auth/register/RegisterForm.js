@@ -24,10 +24,17 @@ export default function RegisterForm() {
   return (
     <form onSubmit={handleSubmit(registrerEmailandPassword)}>
       <RHFTextField control={control} />
-      <LoadingButton fullWidth size="large" type="submit" variant="contained">
+      <LoadingButton fullWidth size="large" type="submit" variant="contained" sx={{ marginTop: '2rem' }}>
         Register
       </LoadingButton>
-      <LoadingButton fullWidth size="large" type="submit" variant="outlined" onClick={onResetFormData}>
+      <LoadingButton
+        fullWidth
+        size="large"
+        type="submit"
+        variant="outlined"
+        onClick={onResetFormData}
+        sx={{ marginTop: '2rem' }}
+      >
         Reset
       </LoadingButton>
     </form>
