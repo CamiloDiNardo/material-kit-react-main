@@ -42,6 +42,7 @@ const ItemDetail = ({ item }) => {
           }}
           image={img}
           alt={name}
+          component="img"
         />
         <CardContent
           sx={{

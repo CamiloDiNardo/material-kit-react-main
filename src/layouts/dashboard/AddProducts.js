@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Grid, Typography, Button, Modal, Box, TextField } from '@mui/material';
 import swal from 'sweetalert';
 import { collection, addDoc } from 'firebase/firestore';
-import { db } from '../../firebaseConfig/firebase';
+import { db, uploadFile } from '../../firebaseConfig/firebase';
 
 const style = {
   width: '80%',
@@ -95,6 +95,15 @@ const AddProducts = () => {
               variant="outlined"
               required
               onChange={(e) => setPrice(e.target.value)}
+            />
+            <TextField
+              type="file"
+              style={{ width: '80%', margin: '15px', backgroundColor: '#fff' }}
+              id="outlined-basic"
+              label="Img"
+              variant="outlined"
+              required // con [0] te da info de la ultima imagen q pongamos
+              onChange={(e) => uploadFile(e.target.files[0])}
             />
 
             <input

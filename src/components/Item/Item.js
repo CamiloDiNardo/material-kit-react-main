@@ -29,6 +29,7 @@ const Item = ({ product }) => {
           }}
           image={img}
           alt={name}
+          component ='img'
         />
         <CardContent
           sx={{

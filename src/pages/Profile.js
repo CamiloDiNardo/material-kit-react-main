@@ -17,7 +17,7 @@ const Profile = () => {
         >
           <img alt="GooglePhoto" src={user.photoURL} />
           <Typography color="textPrimary" gutterBottom variant="h5">
-            {user.displayName} {user.photoURL}
+            {user.displayName}
           </Typography>
         </Box>
       </CardContent>

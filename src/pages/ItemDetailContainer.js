@@ -13,8 +13,7 @@ const ItemDetailContainer = () => {
   useEffect(() => {
     const database = db;
     const queryDb = doc(database, 'products', id);
-    getDoc(queryDb);
-    console.log('esto es getDoc', queryDb).then((resp) => setItem({ id: resp.id, ...resp.data() }));
+    getDoc(queryDb).then((resp) => setItem({ id: resp.id, ...resp.data() }));
   }, [id]);
 
   return (
