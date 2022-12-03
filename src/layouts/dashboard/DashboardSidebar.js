@@ -14,7 +14,7 @@ import Scrollbar from '../../components/Scrollbar';
 import NavSection from '../../components/NavSection';
 //
 import navConfig from './NavConfig';
-
+import { useAuthContext } from '../../context/AuthContext';
 // ----------------------------------------------------------------------
 
 const DRAWER_WIDTH = 280;
@@ -42,6 +42,7 @@ DashboardSidebar.propTypes = {
 };
 
 export default function DashboardSidebar({ isOpenSidebar, onCloseSidebar }) {
+  const { user } = useAuthContext();
   const { pathname } = useLocation();
 
   const isDesktop = useResponsive('up', 'lg');
@@ -65,13 +66,19 @@ export default function DashboardSidebar({ isOpenSidebar, onCloseSidebar }) {
       </Box>
 
       <Box sx={{ mb: 5, mx: 2.5 }}>
-        <Link underline="none" component={RouterLink} to="#">
+        <Link underline="none" component={RouterLink} to="/Profile">
           <AccountStyle>
-            <Avatar src={account.photoURL} alt="photoURL" />
+            {user ? <Avatar src={user.photoURL} alt="photoURL" /> : <Avatar src={account.photoURL} alt="photoURL" />}
             <Box sx={{ ml: 2 }}>
-              <Typography variant="subtitle2" sx={{ color: 'text.primary' }}>
-                {account.displayName}
-              </Typography>
+              {user ? (
+                <Typography variant="subtitle2" sx={{ color: 'text.primary' }}>
+                  {user.displayName}
+                </Typography>
+              ) : (
+                <Typography variant="subtitle2" sx={{ color: 'text.primary' }}>
+                  {account.displayName}
+                </Typography>
+              )}
               <Typography variant="body2" sx={{ color: 'text.secondary' }}>
                 {account.role}
               </Typography>
@@ -91,7 +98,6 @@ export default function DashboardSidebar({ isOpenSidebar, onCloseSidebar }) {
             src="/static/illustrations/illustration_avatar.png"
             sx={{ width: 100, position: 'absolute', top: -50 }}
           />
-
           <Box sx={{ textAlign: 'center' }}>
             <Typography gutterBottom variant="h6">
               Get more?

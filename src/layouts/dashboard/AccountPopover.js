@@ -36,6 +36,8 @@ const MENU_OPTIONS = [
 //
 
 export default function AccountPopover() {
+  const navigate = useNavigate();
+  const { cerrarSesion, user } = useAuthContext();
   const anchorRef = useRef(null);
 
   const [open, setOpen] = useState(null);
@@ -47,8 +49,7 @@ export default function AccountPopover() {
   const handleClose = () => {
     setOpen(null);
   };
-  const navigate = useNavigate();
-  const { cerrarSesion } = useAuthContext();
+
   const handlecerrarSesion = async () => {
     await cerrarSesion;
     handleClose();
@@ -74,7 +75,7 @@ export default function AccountPopover() {
           }),
         }}
       >
-        <Avatar src={account.photoURL} alt="photoURL" />
+        {user ? <Avatar src={user.photoURL} alt="photoURL" /> : <Avatar src={account.photoURL} alt="photoURL" />}
       </IconButton>
 
       <MenuPopover
@@ -92,12 +93,24 @@ export default function AccountPopover() {
         }}
       >
         <Box sx={{ my: 1.5, px: 2.5 }}>
-          <Typography variant="subtitle2" noWrap>
-            {account.displayName}
-          </Typography>
-          <Typography variant="body2" sx={{ color: 'text.secondary' }} noWrap>
-            {account.email}
-          </Typography>
+          {user ? (
+            <Typography variant="subtitle2" noWrap>
+              {user.displayName}
+            </Typography>
+          ) : (
+            <Typography variant="subtitle2" noWrap>
+              {account.displayName}
+            </Typography>
+          )}
+          {user ? (
+            <Typography variant="body2" sx={{ color: 'text.secondary' }} noWrap>
+              {user.email}
+            </Typography>
+          ) : (
+            <Typography variant="body2" sx={{ color: 'text.secondary' }} noWrap>
+              {account.email}
+            </Typography>
+          )}
         </Box>
 
         <Divider sx={{ borderStyle: 'dashed' }} />

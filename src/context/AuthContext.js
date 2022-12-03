@@ -37,7 +37,6 @@ const AuthContextProvider = ({ children }) => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
         Setuser(user); /* si hay un usuario q lo guarde en setuser */
-        console.log(user);
       } else {
         Setuser('');
       }
@@ -69,14 +68,12 @@ y el provider  */
   // Registrar email
   const registrerEmailandPassword = async (data) => {
     await createUserWithEmailAndPassword(auth, data.email, data.password, data.firstname, data.lastname);
-    console.log(data.email, data.password, data.firstname, data.lastname);
     navigate('/login', { replace: true });
   };
   /* Logear usuario OJO no podemos poner en el registro y el login el mismo
 parametro xq sino no registra el usuario */
   const loginEmailandPassword = async (value) => {
     await signInWithEmailAndPassword(auth, value.email, value.password);
-    console.log(value.email, value.password);
     navigate('/dashboard/app', { replace: true });
   };
 
