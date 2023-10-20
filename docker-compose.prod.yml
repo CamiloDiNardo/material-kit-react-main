@@ -1,0 +1,17 @@
+version: "3.9"
+
+services:
+  app:
+    container_name: material-kit-react
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    image: material-kit-react
+    restart: always
+    ports:
+      - 3002:3002
+    environment:
+      - TZ=America/Argentina/Buenos_Aires
+      - REACT_ENV=production
+    volumes:
+      - ./logs:/usr/src/app/logs
