@@ -1,4 +1,4 @@
-#Parar el contenedor en linux
+# Parar el contenedor en linux
 sudo docker container stop material-kit-react
 
 # Mensaje de que el contenedor paro
